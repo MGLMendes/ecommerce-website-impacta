@@ -6,6 +6,9 @@ import br.com.impactaproject.ecommerce.repositories.ProductCategoryRepository;
 import br.com.impactaproject.ecommerce.repositories.ProductRepository;
 import br.com.impactaproject.ecommerce.service.DBService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,7 +16,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DBServiceImpl implements DBService {
+
+    @Value("${spring.profiles.active}")
+    private String profileActive;
 
     private final ProductRepository productRepository;
 
@@ -21,40 +28,44 @@ public class DBServiceImpl implements DBService {
 
     @Override
     public void instanciaDB() {
-        var cat1 = ProductCategory.builder()
-                .categoryName("BOOKS")
-                .build();
+        if (profileActive != null && profileActive.equalsIgnoreCase("pre")) {
+            log.info("Instanciando DB PRE");
+            var cat1 = ProductCategory.builder()
+                    .categoryName("BOOKS")
+                    .build();
 
-        var cat2 = ProductCategory.builder()
-                .categoryName("GAMES")
-                .build();
+            var cat2 = ProductCategory.builder()
+                    .categoryName("GAMES")
+                    .build();
 
-        productCategoryRepository.saveAll(List.of(cat1, cat2));
-
-
-        var prod1 = Product.builder()
-                .sku("1231321312")
-                .name("The Last Of US - Part II")
-                .description("Elie vs Abby")
-                .unitsInStock(2)
-                .unitPrice(new BigDecimal(250))
-                .imageUrl("21313123")
-                .active(true)
-                .category(cat2)
-                .build();
-
-        var prod2 = Product.builder()
-                .sku("1231321312")
-                .name("Pequeno Principe")
-                .description("Um principe pequeno")
-                .unitsInStock(4)
-                .unitPrice(new BigDecimal(26))
-                .imageUrl("21313123")
-                .active(true)
-                .category(cat1)
-                .build();
+            productCategoryRepository.saveAll(List.of(cat1, cat2));
 
 
-        productRepository.saveAll(List.of(prod1, prod2));
+            var prod1 = Product.builder()
+                    .sku("1231321312")
+                    .name("The Last Of US - Part II")
+                    .description("Elie vs Abby")
+                    .unitsInStock(2)
+                    .unitPrice(new BigDecimal(250))
+                    .imageUrl("21313123")
+                    .active(true)
+                    .category(cat2)
+                    .build();
+
+            var prod2 = Product.builder()
+                    .sku("1231321312")
+                    .name("Pequeno Principe")
+                    .description("Um principe pequeno")
+                    .unitsInStock(4)
+                    .unitPrice(new BigDecimal(26))
+                    .imageUrl("21313123")
+                    .active(true)
+                    .category(cat1)
+                    .build();
+
+            productRepository.saveAll(List.of(prod1, prod2));
+        } else {
+            log.info("Instanciando DB PRO");
+        }
     }
 }
