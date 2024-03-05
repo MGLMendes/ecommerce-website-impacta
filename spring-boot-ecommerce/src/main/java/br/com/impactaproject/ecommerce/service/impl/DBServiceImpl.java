@@ -47,7 +47,7 @@ public class DBServiceImpl implements DBService {
                     .description("Elie vs Abby")
                     .unitsInStock(2)
                     .unitPrice(new BigDecimal(250))
-                    .imageUrl("21313123")
+                    .imageUrl("assets/images/products/thelastofus2.png")
                     .active(true)
                     .category(cat2)
                     .build();
@@ -58,7 +58,7 @@ public class DBServiceImpl implements DBService {
                     .description("Um principe pequeno")
                     .unitsInStock(4)
                     .unitPrice(new BigDecimal(26))
-                    .imageUrl("21313123")
+                    .imageUrl("assets/images/products/opequenoprincipe.jpeg")
                     .active(true)
                     .category(cat1)
                     .build();
