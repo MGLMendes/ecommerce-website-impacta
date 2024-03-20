@@ -8,7 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
-@Repository("http://localhost:4200")
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
+
+    Page<Product> findByCategoryId(Long categoryId, Pageable pageable);
 }
