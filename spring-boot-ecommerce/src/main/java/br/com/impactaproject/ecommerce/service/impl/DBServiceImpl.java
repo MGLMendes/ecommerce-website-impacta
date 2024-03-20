@@ -2,6 +2,7 @@ package br.com.impactaproject.ecommerce.service.impl;
 
 import br.com.impactaproject.ecommerce.entities.Product;
 import br.com.impactaproject.ecommerce.entities.ProductCategory;
+import br.com.impactaproject.ecommerce.entities.User;
 import br.com.impactaproject.ecommerce.repositories.ProductCategoryRepository;
 import br.com.impactaproject.ecommerce.repositories.ProductRepository;
 import br.com.impactaproject.ecommerce.service.DBService;
@@ -31,11 +32,11 @@ public class DBServiceImpl implements DBService {
         if (profileActive != null && profileActive.equalsIgnoreCase("pre")) {
             log.info("Instanciando DB PRE");
             var cat1 = ProductCategory.builder()
-                    .categoryName("BOOKS")
+                    .categoryName("Livros")
                     .build();
 
             var cat2 = ProductCategory.builder()
-                    .categoryName("GAMES")
+                    .categoryName("Jogos")
                     .build();
 
             productCategoryRepository.saveAll(List.of(cat1, cat2));
@@ -64,6 +65,13 @@ public class DBServiceImpl implements DBService {
                     .build();
 
             productRepository.saveAll(List.of(prod1, prod2));
+
+
+            User user = User.builder()
+                    .name("Miguel")
+                    .email("miguel@email.com")
+                    .password("1234")
+                    .build();
         } else {
             log.info("Instanciando DB PRO");
         }
