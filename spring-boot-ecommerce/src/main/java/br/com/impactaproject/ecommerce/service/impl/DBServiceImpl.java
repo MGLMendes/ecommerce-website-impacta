@@ -2,18 +2,23 @@ package br.com.impactaproject.ecommerce.service.impl;
 
 import br.com.impactaproject.ecommerce.entities.Product;
 import br.com.impactaproject.ecommerce.entities.ProductCategory;
+import br.com.impactaproject.ecommerce.entities.Profile;
 import br.com.impactaproject.ecommerce.entities.User;
 import br.com.impactaproject.ecommerce.repositories.ProductCategoryRepository;
 import br.com.impactaproject.ecommerce.repositories.ProductRepository;
 import br.com.impactaproject.ecommerce.service.DBService;
+import br.com.impactaproject.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +31,10 @@ public class DBServiceImpl implements DBService {
     private final ProductRepository productRepository;
 
     private final ProductCategoryRepository productCategoryRepository;
+
+    private final UserService userService;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void instanciaDB() {
@@ -70,8 +79,18 @@ public class DBServiceImpl implements DBService {
             User user = User.builder()
                     .name("Miguel")
                     .email("miguel@email.com")
-                    .password("1234")
+                    .password(bCryptPasswordEncoder.encode("1234"))
                     .build();
+
+            user.setProfile(Set.of(Profile.REGULAR, Profile.MEMBER));
+            User user2 = User.builder()
+                    .name("Gustavo")
+                    .email("gustavo@email.com")
+                    .password(bCryptPasswordEncoder.encode("1234"))
+                    .build();
+            user2.setProfile(Set.of(Profile.REGULAR));
+            userService.saveUser(user);
+            userService.saveUser(user2);
         } else {
             log.info("Instanciando DB PRO");
         }
