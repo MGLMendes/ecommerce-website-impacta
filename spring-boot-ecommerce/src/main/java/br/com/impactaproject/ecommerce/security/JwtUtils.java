@@ -33,9 +33,7 @@ public class JwtUtils {
             String username = claims.getSubject();
             Date expirationDate = claims.getExpiration();
             Date now = new Date(System.currentTimeMillis());
-            if (username != null && expirationDate != null && now.before(expirationDate)) {
-                return true;
-            }
+            return username != null && expirationDate != null && now.before(expirationDate);
         }
         return false;
     }
@@ -43,7 +41,7 @@ public class JwtUtils {
     public String getUsername(String token) {
         Claims claims = getClaims(token);
         if (claims != null) {
-            claims.getSubject();
+            return claims.getSubject();
         }
         return null;
     }

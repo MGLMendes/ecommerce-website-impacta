@@ -4,8 +4,8 @@ import lombok.Getter;
 
 public enum Profile {
 
-    MEMBER("member"),
-    REGULAR("regular");
+    MEMBER("MEMBER"),
+    REGULAR("REGULAR");
 
 
     @Getter
