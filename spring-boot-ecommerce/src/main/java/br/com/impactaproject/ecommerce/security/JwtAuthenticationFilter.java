@@ -23,7 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
 
     @Override
@@ -33,7 +33,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         CredentialsDTO creds = new ObjectMapper().readValue(request.getInputStream(), CredentialsDTO.class);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken
                 (creds.getEmail(), creds.getPassword(), new ArrayList<>());
-        AuthenticationManager authenticationManager = authenticationManagerBuilder.getOrBuild();
         return authenticationManager.authenticate(authenticationToken);
 
     }
