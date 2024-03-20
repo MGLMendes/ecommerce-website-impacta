@@ -10,16 +10,16 @@
       <nav class="navbar-sidebar">
         <ul class="list-unstyled navbar-list">
           <li>
-            <a style="text-decoration: none;" href="#">Livros</a>
+            <a style="text-decoration: none;" routerLink="/category/1" routerLinkActive="active-link">Livros</a>
           </li>
           <li>
-            <a style="text-decoration: none;" href="#">Xícara de Café</a>
+            <a style="text-decoration: none;" routerLink="/category/2" routerLinkActive="active-link">Xícara de Café</a>
           </li>
           <li>
-            <a style="text-decoration: none;" href="#">Mouse Pads</a>
+            <a style="text-decoration: none;" routerLink="/category/3" routerLinkActive="active-link">Mouse Pads</a>
           </li>
           <li>
-            <a style="text-decoration: none;" href="#">Etiqueta de bagagem</a>
+            <a style="text-decoration: none;" routerLink="/category/4" routerLinkActive="active-link">Etiqueta de bagagem</a>
           </li>
         </ul>
       </nav>
@@ -53,7 +53,8 @@
     <!-- END HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
-    <app-product-list></app-product-list>
+    <router-outlet></router-outlet>
+
   </div>
 </div>
 
