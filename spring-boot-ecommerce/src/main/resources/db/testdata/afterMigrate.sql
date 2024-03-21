@@ -1,3 +1,12 @@
+set foreign_key_checks = 0;
+delete from product;
+delete from product_category;
+
+set foreign_key_checks = 1;
+
+alter table product auto_increment = 1;
+alter table product_category auto_increment = 1;
+
 -- -----------------------------------------------------
 -- Categories
 -- -----------------------------------------------------
