@@ -7,7 +7,7 @@ E-Commerce Website System Requirements
 Requisitos  
 SSS01 – O Sistema deve exibir uma lista dos produtos.  
 SSS02 - O Sistema deve ter um campo de busca de produtos geral e por categoria.  
-SSS03 – O Sistema deve ter a opção de dicionar produtos no carrinho de compra (CRUD).  
+SSS03 – O Sistema deve ter a opção de adicionar produtos no carrinho de compra (CRUD).  
 SSS04 – O Sistema deve exibir um formulário de check out do carrinho de compra.  
 SSS05 – O Sistema deve ter uma tela Login/Logout de usuário.   
 
