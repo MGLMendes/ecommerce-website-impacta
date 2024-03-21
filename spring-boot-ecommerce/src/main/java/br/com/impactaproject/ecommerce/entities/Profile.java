@@ -2,13 +2,13 @@ package br.com.impactaproject.ecommerce.entities;
 
 import lombok.Getter;
 
+@Getter
 public enum Profile {
 
-    MEMBER("MEMBER"),
-    REGULAR("REGULAR");
+    MEMBER("ROLE_MEMBER"),
+    REGULAR("ROLE_REGULAR");
 
 
-    @Getter
     private String description;
 
     Profile(String description) {

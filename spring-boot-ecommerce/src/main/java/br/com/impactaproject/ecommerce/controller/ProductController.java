@@ -32,7 +32,7 @@ public class ProductController {
         return ResponseEntity.ok(new PageImpl<>(collectionModel, pageable, allProductsPage.getTotalElements()));
     }
 
-    @PreAuthorize("hasAnyRole('REGULAR')")
+    @PreAuthorize("hasRole('REGULAR')")
     @GetMapping("/category/{id}")
     public ResponseEntity<Page<ProductDTO>> getAllProductsByCategoryId(@PathVariable Long id, Pageable pageable) {
         Page<Product> allProductsPage = productService.getAllProductsByCategoryId(id, pageable);
