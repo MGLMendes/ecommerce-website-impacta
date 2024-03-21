@@ -11,5 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductCategoryDTO {
 
+    private Long id;
     private String categoryName;
 }
