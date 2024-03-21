@@ -43,4 +43,13 @@ public class ProductController {
         ProductDTO model = productAssemble.toModel(productService.getProductById(id));
         return ResponseEntity.ok(model);
     }
+
+    @GetMapping("/name-containing/{name}")
+    public ResponseEntity<Page<ProductDTO>> getAllProductsByName(@PathVariable String name, Pageable pageable) {
+        Page<Product> allProductsPage = productService.getProductsByName(name, pageable);
+        List<ProductDTO> collectionModel = productAssemble.toCollectionModel(allProductsPage.getContent());
+        return ResponseEntity.ok(new PageImpl<>(collectionModel, pageable, allProductsPage.getTotalElements()));
+    }
+
+
 }
