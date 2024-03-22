@@ -1,4 +1,3 @@
-import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -6,30 +5,36 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductService } from './services/product.service';
+import { LoginComponent } from './components/login/login.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
   {path: 'products', component: ProductListComponent},
-  {path: '',redirectTo: '/products', pathMatch: 'full'},
-  {path: '**',redirectTo: '/products', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent}
+  {path: '',redirectTo: '/login', pathMatch: 'full'},
+  {path: '**',redirectTo: '/login', pathMatch: 'full'},
+
 ];
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     ProductCategoryMenuComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
