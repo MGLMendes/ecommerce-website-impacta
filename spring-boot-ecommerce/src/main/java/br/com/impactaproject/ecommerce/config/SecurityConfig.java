@@ -33,7 +33,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_MATHCERS = {"/h2-console/**", "/login/"};
+    private static final String[] PUBLIC_MATHCERS = {"/h2-console/**", "/login/", "/user/register/**"};
     private final Environment env;
     private final JwtUtils jwtUtils;
     private final UserDetailsService userDetailsService;

@@ -1,4 +1,4 @@
-package br.com.impactaproject.ecommerce.entities;
+package br.com.impactaproject.ecommerce.entities.enums;
 
 import lombok.Getter;
 
