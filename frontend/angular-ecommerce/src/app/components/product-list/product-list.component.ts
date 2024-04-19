@@ -1,5 +1,7 @@
+import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -16,7 +18,8 @@ export class ProductListComponent implements OnInit {
   searchMode: boolean = false;
 
   constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -55,7 +58,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-
   handleSearchProducts(){
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
 
@@ -64,5 +66,15 @@ export class ProductListComponent implements OnInit {
         this.products = data;
       }
     )
+  }
+
+  addToCart(theProduct: Product) {
+
+    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+    // TODO ... do the real work
+    const theCartItem = new CartItem(theProduct);
+
+    this.cartService.addToCart(theCartItem);
   }
 }

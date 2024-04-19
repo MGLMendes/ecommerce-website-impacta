@@ -14,6 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
+
+    private Long id;
     private String sku;
     private String name;
     private String description;
