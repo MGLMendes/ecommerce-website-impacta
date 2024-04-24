@@ -38,4 +38,9 @@ public class User {
     private LocalDate birthday;
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Profile> profile = new HashSet<>();
+    private Boolean membro;
+
+    public Boolean isMembro() {
+        return membro;
+    }
 }

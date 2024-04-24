@@ -19,4 +19,5 @@ public class UserInputDTO {
     private String password;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthday;
+    private Boolean membro;
 }

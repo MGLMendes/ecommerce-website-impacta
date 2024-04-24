@@ -24,7 +24,6 @@ public class ProductController {
 
     private final ProductAssemble productAssemble;
 
-    @PreAuthorize("hasAnyRole('MEMBER')")
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> getAllProducts(Pageable pageable) {
         Page<Product> allProductsPage = productService.getAllProducts(pageable);
@@ -32,8 +31,6 @@ public class ProductController {
         return ResponseEntity.ok(new PageImpl<>(collectionModel, pageable, allProductsPage.getTotalElements()));
     }
 
-
-    @PreAuthorize("hasRole('REGULAR')")
     @GetMapping("/category/{id}")
     public ResponseEntity<Page<ProductDTO>> getAllProductsByCategoryId(@PathVariable Long id, Pageable pageable) {
         Page<Product> allProductsPage = productService.getAllProductsByCategoryId(id, pageable);

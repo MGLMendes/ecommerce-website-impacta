@@ -17,9 +17,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User user) {
-        // Adicionando Profile REGULAR padrão
-        user.getProfile().add(Profile.REGULAR);
-
+        if (user.isMembro()) {
+            user.getProfile().add(Profile.MEMBER);
+        } else {
+            user.getProfile().add(Profile.REGULAR);
+        }
         // Encriptando a senha
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
