@@ -45,6 +45,7 @@ public class SecurityConfig {
             http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         }
         http.csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable) // Ou Customizer.withDefaults()
                 .authorizeHttpRequests(auth -> auth.requestMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
