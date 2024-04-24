@@ -1,0 +1,32 @@
+<div class="main-content">
+<div class="container pt-5">
+  <form class="form">
+    <h1>Ecommerce Impacta</h1>
+    <div class="full-width pt-5">
+      <label class="form-label">Email</label>
+      <input
+      required
+      [(ngModel)]="creds.email"
+      [formControl]="email"
+      name="email"
+      type="email"
+      class="form-control"
+      placeholder="name@example.com">
+    </div>
+    <div class="pt-5">
+      <label class="form-label">Password</label>
+      <input
+      [(ngModel)]="creds.password"
+      [formControl]="password"
+      required
+      name="password"
+      type="password"
+      class="form-control"
+      placeholder="123">
+    </div>
+
+    <button type="button" [disabled]="!validaCampos()" class="botao full-width btn btn-primary">Login</button>
+
+  </form>
+</div>
+</div>
