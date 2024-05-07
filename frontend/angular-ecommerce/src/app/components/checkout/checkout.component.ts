@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ImpactaFormService } from 'src/app/services/impacta-form.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +15,14 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+
+  creditCardMonths: number[] = [];
+  creditCardYears: number[] = [];
+
+
+  constructor(private formBuilder: FormBuilder,
+    private impactService: ImpactaFormService
+  ) { }
 
   ngOnInit(): void {
 
@@ -47,6 +55,23 @@ export class CheckoutComponent implements OnInit {
           expirationYear: ['']
         }),
     });
+
+    const startMonth: number = new Date().getMonth() + 1;
+
+    this.impactService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Expiration Months: ", JSON.stringify(data))
+        this.creditCardMonths = data;
+      }
+    )
+
+
+    this.impactService.getCreditCardYears().subscribe(
+      data => {
+        console.log("Expiration Years: " , JSON.stringify(data))
+        this.creditCardYears = data;
+      }
+    )
   }
 
 
