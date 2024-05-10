@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CartService } from 'src/app/services/cart.service';
 import { ImpactaFormService } from 'src/app/services/impacta-form.service';
 
 @Component({
@@ -21,10 +22,13 @@ export class CheckoutComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    private impactService: ImpactaFormService
+    private impactService: ImpactaFormService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails()
 
     this.checkoutFormGroup = this.formBuilder.group({
         customer: this.formBuilder.group({
@@ -72,6 +76,22 @@ export class CheckoutComponent implements OnInit {
         this.creditCardYears = data;
       }
     )
+  }
+
+
+  reviewCartDetails() {
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => {
+        this.totalQuantity = totalQuantity;
+      }
+    );
+
+
+    this.cartService.totalPrice.subscribe(
+      totalPrice => {
+        this.totalPrice = totalPrice;
+      }
+    );
   }
 
 
