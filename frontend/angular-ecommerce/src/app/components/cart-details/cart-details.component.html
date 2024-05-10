@@ -1,11 +1,6 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
-
-      <div *ngIf="cartItens.length === 0" class="alert alert-warning col-md-12" role="alert">
-        No products found.
-      </div>
-
       <div *ngIf="cartItens.length > 0">
         <table class="table table-bordered">
 
@@ -14,6 +9,8 @@
             <th width="50%">Product Detail</th>
             <th width="30%"></th>
           </tr>
+
+
 
           <tr *ngFor="let tempCartItem of cartItens">
             <td>
@@ -44,10 +41,12 @@
 
                   </div>
                 </div>
+                <div>
+                  <button class="btn btn-primary mt-2" (click)="remove(tempCartItem)" >Remove</button>
+                </div>
               </div>
 
-              <button (click)="remove(tempCartItem)" class="btn btn-primary btn-sm mt-2">Remove</button>
-              <p class="mt-2">Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'BRL' }.toFixed(2)</p>
+              <p class="mt-2">Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'BRL' }}</p>
             </td>
           </tr>
 
@@ -56,7 +55,10 @@
             <td style="font-weight: bold">
               <p>Total Quantity: {{ totalQuantity }}</p>
               <p>Shipping: FREE</p>
-              <p>Total Price: {{ totalPrice | currency: 'BRL' }}.toFixed(2)</p>
+              <p>Total Price: {{ totalPrice | currency: 'BRL' }}</p>
+              <div>
+                <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
+              </div>
             </td>
           </tr>
         </table>
