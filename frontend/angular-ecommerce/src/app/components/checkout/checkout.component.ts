@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Order } from 'src/app/common/order';
+import { OrderItem } from 'src/app/common/order-item';
+import { Purchase } from 'src/app/common/purchase';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { ImpactaFormService } from 'src/app/services/impacta-form.service';
 
 @Component({
@@ -23,7 +28,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private impactService: ImpactaFormService,
-    private cartService: CartService
+    private cartService: CartService,
+    private checkoutService: CheckoutService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -96,11 +103,49 @@ export class CheckoutComponent implements OnInit {
 
 
   onSubmit() {
-    console.log("Handling the submit button")
-    console.log(this.checkoutFormGroup.get('customer').value)
-    console.log(this.checkoutFormGroup.get('shippingAddress').value)
-    console.log(this.checkoutFormGroup.get('billingAddress').value)
-    console.log(this.checkoutFormGroup.get('creditCard').value)
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+
+    const cartItems = this.cartService.cartItems;
+
+    let orderItemsShort: OrderItem[] = cartItems.map(
+      tempCartItem => new OrderItem(tempCartItem)
+    );
+
+    let purchase = new Purchase();
+
+    purchase.customer = this.checkoutFormGroup.get('customer').value;
+
+    purchase.shippingAddress = this.checkoutFormGroup.get('shippingAddress').value;
+    purchase.billingAddress = this.checkoutFormGroup.get('billingAddress').value;
+
+    purchase.order = order;
+    purchase.orderItems = orderItemsShort;
+
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: response => {
+          console.log(response)
+          alert(`Your order has been received.\n Order tracking number: ${response.orderTrackingNumber}`)
+          this.resetCart()
+        },
+        error: error => {
+          alert(`There was an error: ${error.message}`)
+        }
+      }
+    )
+  }
+
+  resetCart() {
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+
+    this.checkoutFormGroup.reset();
+
+    this.router.navigateByUrl("/products")
   }
 
   copyShippingAddressToBillingAddress(event) {
