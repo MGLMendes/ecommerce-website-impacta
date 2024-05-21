@@ -10,9 +10,16 @@ import { LoginComponent } from './components/login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'cart-details', component: CartDetailsComponent},
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
@@ -27,6 +34,9 @@ const routes: Routes = [
     ProductListComponent,
     ProductCategoryMenuComponent,
     SearchComponent,
+    CartStatusComponent,
+    CartDetailsComponent,
+    CheckoutComponent,
     LoginComponent,
   ],
   imports: [

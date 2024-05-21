@@ -26,4 +26,10 @@ export class LoginComponent implements OnInit {
     return this.email.valid && this.password.valid
   }
 
+
+  login() {
+    console.log(this.creds.email)
+    console.log(this.creds.password)
+  }
+
 }

@@ -15,7 +15,7 @@ export class ProductService {
 
   getProductList(): Observable<Product[]> {
 
-    const searchUrl = `${this.baseUrl}/products?size=10&page=2`;
+    const searchUrl = `${this.baseUrl}/products?size=10&page=0`;
     return this.getProducts(searchUrl)
   }
 
