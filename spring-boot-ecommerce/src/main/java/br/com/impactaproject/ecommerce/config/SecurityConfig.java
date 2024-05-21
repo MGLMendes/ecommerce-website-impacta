@@ -33,7 +33,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_MATCHERS = {"/h2-console/**", "/login/", "/user/register/**"};
+    private static final String[] PUBLIC_MATCHERS = {"/h2-console/**", "/login/", "/user/register/**", "/auth/**"};
     private final Environment env;
     private final JwtUtils jwtUtils;
     private final UserDetailsService userDetailsService;
@@ -45,7 +45,7 @@ public class SecurityConfig {
             http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         }
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable) // Ou Customizer.withDefaults()
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

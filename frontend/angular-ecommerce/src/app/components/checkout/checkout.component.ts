@@ -132,7 +132,8 @@ export class CheckoutComponent implements OnInit {
           this.resetCart()
         },
         error: error => {
-          alert(`There was an error: ${error.message}`)
+          alert(`Token Expired`)
+          this.router.navigateByUrl("/login")
         }
       }
     )

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class ProductService {
 
   private baseUrl = "http://localhost:8080/api"
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private loginService: LoginService
+  ) {
+   }
 
   getProductList(): Observable<Product[]> {
 
@@ -28,8 +32,10 @@ export class ProductService {
 
   getProductCategories(): Observable<ProductCategory[]>  {
     const searchUrl = `${this.baseUrl}/products-category`
-    return this.httpClient.get<GetProductsCategoriesResponse>(searchUrl).pipe(
-      map(response => response.content)
+    return this.httpClient.get<GetProductsCategoriesResponse>(searchUrl, this.loginService.getAuthHeader()).pipe(
+      map(response => 
+        response.content
+      )
     )
   }
 
@@ -40,7 +46,7 @@ export class ProductService {
   }
 
   private getProducts(searchUrl: string): Observable<Product[]> {
-    return this.httpClient.get<GetProductsResponse>(searchUrl).pipe(
+    return this.httpClient.get<GetProductsResponse>(searchUrl, this.loginService.getAuthHeader()).pipe(
       map(response => response.content)
     );
   }
