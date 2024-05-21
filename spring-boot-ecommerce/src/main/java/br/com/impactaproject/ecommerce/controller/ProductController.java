@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,6 @@ public class ProductController {
         List<ProductDTO> collectionModel = productAssemble.toCollectionModel(allProductsPage.getContent());
         return ResponseEntity.ok(new PageImpl<>(collectionModel, pageable, allProductsPage.getTotalElements()));
     }
-
 
     @GetMapping("/category/{id}")
     public ResponseEntity<Page<ProductDTO>> getAllProductsByCategoryId(@PathVariable Long id, Pageable pageable) {

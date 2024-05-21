@@ -2,17 +2,22 @@ package br.com.impactaproject.ecommerce.service.impl;
 
 import br.com.impactaproject.ecommerce.entities.Product;
 import br.com.impactaproject.ecommerce.entities.ProductCategory;
+import br.com.impactaproject.ecommerce.entities.enums.Profile;
+import br.com.impactaproject.ecommerce.entities.User;
 import br.com.impactaproject.ecommerce.repositories.ProductCategoryRepository;
 import br.com.impactaproject.ecommerce.repositories.ProductRepository;
 import br.com.impactaproject.ecommerce.service.DBService;
+import br.com.impactaproject.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -26,16 +31,20 @@ public class DBServiceImpl implements DBService {
 
     private final ProductCategoryRepository productCategoryRepository;
 
+    private final UserService userService;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public void instanciaDB() {
         if (profileActive != null && profileActive.equalsIgnoreCase("pre")) {
             log.info("Instanciando DB PRE");
             var cat1 = ProductCategory.builder()
-                    .categoryName("BOOKS")
+                    .categoryName("Livros")
                     .build();
 
             var cat2 = ProductCategory.builder()
-                    .categoryName("GAMES")
+                    .categoryName("Jogos")
                     .build();
 
             productCategoryRepository.saveAll(List.of(cat1, cat2));
