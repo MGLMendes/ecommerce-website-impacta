@@ -1,6 +1,8 @@
 set foreign_key_checks = 0;
 delete from product;
 delete from product_category;
+delete from user_profiles;
+delete from users;
 
 set foreign_key_checks = 1;
 

@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  loaded(): any {
+    let token = localStorage.getItem("Authorization")
+    if (token) {
+      return true
+    }
+  }
   title = 'angular-ecommerce';
 }
