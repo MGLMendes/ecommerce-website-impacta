@@ -23,7 +23,11 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody UserInputDTO userInput) {
+    public ResponseEntity<?> registerUser(@RequestBody UserInputDTO userInput) {
+        User findUserAlreadyRegister = userService.verifyUserAlreadyRegister(userInput.getEmail());
+        if (findUserAlreadyRegister != null) {
+            return ResponseEntity.badRequest().body("Usuário já cadastrado");
+        }
         User user = userService.registerUser(userDisassemble.toEntity(userInput));
         UserDTO userDTO = userAssemble.toModel(user);
         return ResponseEntity.status(201).body(userDTO);
