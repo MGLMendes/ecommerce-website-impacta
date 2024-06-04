@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  register()  {
+    this.router.navigateByUrl("/register")
+  }
+
   isTokenValid() {
     this.service.isTokenValid(this.service.getAuthToken()).subscribe(
       response => {

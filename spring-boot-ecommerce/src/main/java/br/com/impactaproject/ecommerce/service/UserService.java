@@ -5,4 +5,6 @@ import br.com.impactaproject.ecommerce.entities.User;
 public interface UserService {
 
     User registerUser(User user);
+
+    User verifyUserAlreadyRegister(String email);
 }

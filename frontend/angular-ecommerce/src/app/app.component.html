@@ -2,7 +2,7 @@
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-      <a href="#">
+      <a>
         <img src="assets/images/logo.jpg" height="50" alt="impactaecommerce" class="img-responsive" id="logo">
       </a>
     </div>
@@ -22,6 +22,13 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-search></app-search>
+
+            <button
+            (click)="logout()"
+            class="btn-primary">
+              Logout
+            </button>
+
 
             <app-cart-status></app-cart-status>
 

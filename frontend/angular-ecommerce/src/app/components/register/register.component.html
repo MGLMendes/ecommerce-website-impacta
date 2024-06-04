@@ -1,0 +1,58 @@
+<div class="main-content">
+  <div class="container pt-5">
+    <form class="form">
+      <h1>Ecommerce Impacta</h1>
+      <div class="full-width pt-5">
+        <label class="form-label">Name</label>
+        <input
+        required
+        [(ngModel)]="registerUser.name"
+        [formControl]="name"
+        name="name"
+        type="name"
+        class="form-control"
+        placeholder="Clebinho">
+      </div>
+
+      <div class="full-width pt-5">
+        <label class="form-label">Email</label>
+        <input
+        required
+        [(ngModel)]="registerUser.email"
+        [formControl]="email"
+        name="email"
+        type="email"
+        class="form-control"
+        placeholder="name@example.com">
+      </div>
+
+      <div class="pt-5">
+        <label class="form-label">Password</label>
+        <input
+        [(ngModel)]="registerUser.password"
+        [formControl]="password"
+        required
+        name="password"
+        type="password"
+        class="form-control"
+        placeholder="123">
+      </div>
+
+      <div class="full-width pt-5">
+        <label class="form-label">Birthday</label>
+        <input
+        required
+        [(ngModel)]="registerUser.birthday"
+        [formControl]="birthday"
+        name="birthday"
+        type="birthday"
+        class="form-control"
+        placeholder="dd/MM/yyyy">
+      </div>
+
+      <button type="button" (click)="register()" class="botao full-width btn btn-primary">Register</button>
+      <button type="button" (click)="login()" class="botao full-width btn btn-primary">Login</button>
+
+    </form>
+  </div>
+  </div>
